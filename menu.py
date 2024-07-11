@@ -20,21 +20,24 @@ class Menu():
             2) Establecer Cliente
             0) Salir\n
             """)
-            opc=int(input("Escribe la opción: "))
-            
-            if opc==1:
-                puerto=int(input("Escribe el número del puerto en donde correra el servidor: "))
-                servidor=Servidor(puerto)
-                servidor.start()
-            elif opc==2:
-                puerto=int(input("Escribe el número del puerto en donde esta corriendo el servidor: "))
-                servidor=input("Escribe la dirección IP donde esta corriendo el servidor: ")
-                print(" para cerrar conexión escribe: !DESCONECTAR")
+            try:
+                opc=int(input("Escribe la opción: "))
                 
-                cliente=Cliente(puerto, servidor)
-                mensaje=input("Escribe el mensaje dirijido al servidor: ")
-                cliente.send(mensaje)
-            elif opc==0:
-                continuar=False
-            else:
-                print("Opción no válida...")
+                if opc==1:
+                    puerto=int(input("Escribe el número del puerto en donde correra el servidor: "))
+                    servidor=Servidor(puerto)
+                    servidor.start()
+                elif opc==2:
+                    puerto=int(input("Escribe el número del puerto en donde esta corriendo el servidor: "))
+                    servidor=input("Escribe la dirección IP donde esta corriendo el servidor: ")
+                    print(" para cerrar conexión escribe: !DESCONECTAR")
+                    
+                    cliente=Cliente(puerto, servidor)
+                    mensaje=input("Escribe el mensaje dirijido al servidor: ")
+                    cliente.send(mensaje)
+                elif opc==0:
+                    continuar=False
+                else:
+                    print("Opción no válida...")
+            except ValueError:
+                print("Solo puede introducir números!!!!!!!!!!!")
