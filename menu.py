@@ -1,5 +1,6 @@
 from cliente import Cliente
 from servidor import Servidor
+from informacionPC import Info
 class Menu():
     def menu(self):
         
@@ -18,6 +19,7 @@ class Menu():
             
             1) Establecer Servidor 
             2) Establecer Cliente
+            3) Información del PC
             0) Salir\n
             """)
             try:
@@ -35,9 +37,15 @@ class Menu():
                     cliente=Cliente(puerto, servidor)
                     mensaje=input("Escribe el mensaje dirijido al servidor: ")
                     cliente.send(mensaje)
+                elif opc==3:
+                    informacion = Info()
+                    informacion.getInfo()
                 elif opc==0:
                     continuar=False
                 else:
                     print("Opción no válida...")
             except ValueError:
                 print("Solo puede introducir números!!!!!!!!!!!")
+            except KeyboardInterrupt:
+                print("Adiós")
+                continuar=False
