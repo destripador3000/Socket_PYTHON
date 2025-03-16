@@ -4,29 +4,15 @@ from informacionPC import Info
 
 
 
-
-
-
 class Menu():
     def menu(self):
-        
-        continuar=True
+        continuar = True
         while continuar:        
-        
             print("""
-                # {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
-                # {}________                     __           .__                    .___               {}
-                # {}\______ \    ____    _______/  |_ _______ |__|______ _____     __| _/ ____ _______  {}
-                # {} |    |  \ _/ __ \  /  ___/\   __\\_  __ \|  |\____ \\__  \   / __ | /  _ \\_  __ \ {}
-                # {} |    `   \\  ___/  \___ \  |  |   |  | \/|  ||  |_> >/ __ \_/ /_/ |(  <_> )|  | \/ {}
-                # {}/_______  / \___  >/____  > |__|   |__|   |__||   __/(____  /\____ | \____/ |__|    {}
-                # {}        \/      \/      \/                    |__|        \/      \/                {}
-                # {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}      
-                
                 1) Establecer Servidor 
                 2) Establecer Cliente
                 3) Información del PC
-                0) Salir\n
+                0) Salir
                 """)
             try:
                 opc = int(input("Escribe la opción: "))
@@ -44,7 +30,7 @@ class Menu():
                     cliente = Cliente(puerto, servidor_ip)
                     while True:
                         comando = input("Introduce un comando para ejecutar en el servidor: ")
-                        if comando.lower() == "!descconectar":
+                        if comando.strip().upper() == "!DESCONECTAR":
                             cliente.disconnect()
                             break
                         cliente.send(comando)
@@ -60,7 +46,12 @@ class Menu():
                     print("Opción no válida...")
 
             except ValueError:
-                print("Solo puede introducir números!!!!!!!!!!!")
+                print("Solo puede introducir números!")
             except KeyboardInterrupt:
                 print("Adiós")
                 continuar = False
+
+
+if __name__ == "__main__":
+    app = Menu()
+    app.menu()

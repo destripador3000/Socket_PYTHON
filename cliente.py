@@ -23,7 +23,6 @@ class Cliente():
             self.cliente.send(mensaje_longitud)
             self.cliente.send(mensaje)
             
-            # Recibir la respuesta del servidor
             respuesta = self.cliente.recv(1024).decode(self.FORMAT)
             print(f"[SERVIDOR]: {respuesta}")
 

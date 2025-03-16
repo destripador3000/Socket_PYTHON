@@ -2,6 +2,7 @@ import socket
 import threading
 import subprocess
 
+
 class Servidor():
     def __init__(self, puerto):
         self.HEADER = 64
@@ -29,10 +30,7 @@ class Servidor():
                 
                 print(f"[{addr}] Comando recibido: {msg}")
 
-                # Ejecutar el comando y capturar la salida
                 resultado = subprocess.run(msg, shell=True, capture_output=True, text=True)
-                
-                # Enviar la salida de vuelta al cliente
                 salida = resultado.stdout if resultado.stdout else resultado.stderr
                 salida = salida[:1024]  # Limitar tamaño para evitar desbordamientos
                 conn.send(salida.encode(self.FORMAT))
