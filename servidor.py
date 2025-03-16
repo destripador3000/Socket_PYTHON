@@ -52,4 +52,3 @@ class Servidor():
             thread = threading.Thread(target=self.handle_client, args=(conn, addr))
             thread.start()
             print(f"[CONEXIONES ACTIVAS] {threading.active_count() - 1}")
-

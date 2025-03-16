@@ -34,4 +34,3 @@ class Cliente():
         self.send(self.DISCONNECT_MESSAGE)
         self.cliente.close()
 
-

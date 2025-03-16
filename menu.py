@@ -1,6 +1,12 @@
 from cliente import Cliente
 from servidor import Servidor
 from informacionPC import Info
+
+
+
+
+
+
 class Menu():
     def menu(self):
         
@@ -23,29 +29,38 @@ class Menu():
             0) Salir\n
             """)
             try:
-                opc=int(input("Escribe la opción: "))
+                opc = int(input("Escribe la opción: "))
                 
-                if opc==1:
-                    puerto=int(input("Escribe el número del puerto en donde correra el servidor: "))
-                    servidor=Servidor(puerto)
+                if opc == 1:
+                    puerto = int(input("Escribe el número del puerto en donde correrá el servidor: "))
+                    servidor = Servidor(puerto)
                     servidor.start()
-                elif opc==2:
-                    puerto=int(input("Escribe el número del puerto en donde esta corriendo el servidor: "))
-                    servidor=input("Escribe la dirección IP donde esta corriendo el servidor: ")
-                    print(" para cerrar conexión escribe: !DESCONECTAR")
-                    
-                    cliente=Cliente(puerto, servidor)
-                    mensaje=input("Escribe el mensaje dirijido al servidor: ")
-                    cliente.send(mensaje)
-                elif opc==3:
+
+                elif opc == 2:
+                    puerto = int(input("Escribe el número del puerto en donde está corriendo el servidor: "))
+                    servidor_ip = input("Escribe la dirección IP del servidor: ")
+                    print("Para cerrar la conexión, escribe: !DESCONECTAR")
+
+                    cliente = Cliente(puerto, servidor_ip)
+                    while True:
+                        comando = input("Introduce un comando para ejecutar en el servidor: ")
+                        if comando.lower() == "!descconectar":
+                            cliente.disconnect()
+                            break
+                        cliente.send(comando)
+
+                elif opc == 3:
                     informacion = Info()
                     informacion.getInfo()
-                elif opc==0:
-                    continuar=False
+
+                elif opc == 0:
+                    continuar = False
+
                 else:
                     print("Opción no válida...")
+
             except ValueError:
                 print("Solo puede introducir números!!!!!!!!!!!")
             except KeyboardInterrupt:
                 print("Adiós")
-                continuar=False
+                continuar = False
