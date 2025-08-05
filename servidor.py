@@ -7,7 +7,7 @@ class Servidor():
     def __init__(self, puerto):
         self.HEADER = 64
         self.PORT = puerto
-        self.SERVER = socket.gethostbyname(socket.gethostname())
+        self.SERVER = socket.gethostbyname(socket.gethostname()) #Si se quiere cambiar la IP del host manualmente se tiene que cambiar esta línea.
         self.ADDR = (self.SERVER, self.PORT)
         self.FORMAT = 'utf-8'
         self.DISCONNECT_MESSAGE = "!DESCONECTAR"
@@ -49,4 +49,5 @@ class Servidor():
             conn, addr = self.server.accept()
             thread = threading.Thread(target=self.handle_client, args=(conn, addr))
             thread.start()
+
             print(f"[CONEXIONES ACTIVAS] {threading.active_count() - 1}")
